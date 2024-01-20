@@ -53,7 +53,7 @@ sed -i 's|--http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=
 sed -i 's|--with-compat||g' rules
 sed -i 's|--with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module||g' rules
 sed -i 's|--with-http_stub_status_module||g' rules
-sed -i 's|--with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream=dynamic --with-stream_ssl_module --with-stream_ssl_preread_module|--with-http_v3_module --with-pcre-jit|g' rules
+sed -i 's|--with-mail --with-file-aio --with-threads --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream=dynamic --with-stream_ssl_module --with-stream_ssl_preread_module|--with-http_v3_module --with-pcre-jit|g' rules
 cd ..
 dpkg-buildpackage -b > /dev/null 2>&1
 cd ..
