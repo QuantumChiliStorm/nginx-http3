@@ -5,13 +5,13 @@ cd /github/home
 
 echo "Install dependencies."
 # Install necessary packages for building Nginx on AlmaLinux
-dnf install -y epel-release > /dev/null 2>&1
-dnf groupinstall -y "Development Tools" > /dev/null 2>&1
-dnf install -y cmake git libmaxminddb-devel wget rpm-build pcre2-devel > /dev/null 2>&1
+dnf install -y epel-release 
+dnf groupinstall -y "Development Tools" 
+dnf install -y cmake git libmaxminddb-devel wget rpm-build pcre2-devel
 
 echo "Fetch NGINX source code."
 # Download Nginx source RPM and extract it
-wget -qO- https://nginx.org/packages/mainline/centos/9/SRPMS/nginx-1.27.1-1.el9.ngx.src.rpm | rpm2cpio | cpio -idmv > /dev/null 2>&1
+wget -qO- https://nginx.org/packages/mainline/centos/9/SRPMS/nginx-1.27.1-1.el9.ngx.src.rpm | rpm2cpio | cpio -idmv
 
 # Extract the nginx spec file
 rpmdev-setuptree
@@ -23,7 +23,7 @@ echo "Fetch quictls source code."
 mkdir -p ~/rpmbuild/SOURCES/modules
 cd ~/rpmbuild/SOURCES/modules
 
-git clone --depth 1 --recursive https://github.com/quictls/openssl > /dev/null 2>&1
+git clone --depth 1 --recursive https://github.com/quictls/openssl
 
 echo "Fetch additional dependencies."
 #git clone --depth 1 --recursive https://github.com/google/ngx_brotli > /dev/null 2>&1
@@ -33,8 +33,8 @@ echo "Fetch additional dependencies."
 #cmake --build . --config Release --target brotlienc > /dev/null 2>&1
 
 cd ~/rpmbuild/SOURCES/modules
-git clone --depth 1 --recursive https://github.com/leev/ngx_http_geoip2_module > /dev/null 2>&1
-git clone --depth 1 --recursive https://github.com/openresty/headers-more-nginx-module > /dev/null 2>&1
+git clone --depth 1 --recursive https://github.com/leev/ngx_http_geoip2_module
+git clone --depth 1 --recursive https://github.com/openresty/headers-more-nginx-module 
 
 echo "Prepare Nginx for building."
 cd ~/rpmbuild/SPECS/
@@ -49,7 +49,7 @@ sed -i 's|--with-stream_ssl_preread_module|--with-pcre-jit --with-openssl=~/rpmb
 
 echo "Build Nginx RPM package."
 # Build the RPM package
-rpmbuild -ba nginx.spec > /dev/null 2>&1
+rpmbuild -ba nginx.spec
 
 echo "Package Nginx."
 # Copy the built RPM package to the desired location
