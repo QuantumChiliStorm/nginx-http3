@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: almalinux-latest
+    runs-on: ubuntu-latest
     name: build
     steps:
       - name: Checkout
