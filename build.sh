@@ -7,7 +7,7 @@ echo "Install dependencies."
 # Install necessary packages for building Nginx on AlmaLinux
 dnf install -y epel-release > /dev/null 2>&1
 dnf groupinstall -y "Development Tools" > /dev/null 2>&1
-dnf install -y cmake git libmaxminddb-devel wget rpm-build > /dev/null 2>&1
+dnf install -y cmake git libmaxminddb-devel wget rpm-build pcre2-devel > /dev/null 2>&1
 
 echo "Fetch NGINX source code."
 # Download Nginx source RPM and extract it
@@ -25,12 +25,12 @@ cd ~/rpmbuild/SOURCES/modules
 
 git clone --depth 1 --recursive https://github.com/quictls/openssl > /dev/null 2>&1
 
-echo "Fetch additional dependencies."
-git clone --depth 1 --recursive https://github.com/google/ngx_brotli > /dev/null 2>&1
-mkdir ngx_brotli/deps/brotli/out
-cd ngx_brotli/deps/brotli/out
-cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=installed .. > /dev/null 2>&1
-cmake --build . --config Release --target brotlienc > /dev/null 2>&1
+#echo "Fetch additional dependencies."
+#git clone --depth 1 --recursive https://github.com/google/ngx_brotli > /dev/null 2>&1
+#mkdir ngx_brotli/deps/brotli/out
+#cd ngx_brotli/deps/brotli/out
+#cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_INSTALL_PREFIX=installed .. > /dev/null 2>&1
+#cmake --build . --config Release --target brotlienc > /dev/null 2>&1
 
 cd ~/rpmbuild/SOURCES/modules
 git clone --depth 1 --recursive https://github.com/leev/ngx_http_geoip2_module > /dev/null 2>&1
@@ -43,7 +43,8 @@ cd ~/rpmbuild/SPECS/
 sed -i 's|%define _with_compat 1|%define _with_compat 0|g' nginx.spec
 sed -i 's|%define _with_stream 1|%define _with_stream 0|g' nginx.spec
 sed -i 's|--with-compat||g' nginx.spec
-sed -i 's|--with-http_ssl_module|--with-http_ssl_module --add-module=~/rpmbuild/SOURCES/modules/ngx_brotli --add-module=~/rpmbuild/SOURCES/modules/ngx_http_geoip2_module --add-module=~/rpmbuild/SOURCES/modules/headers-more-nginx-module|g' nginx.spec
+#sed -i 's|--with-http_ssl_module|--with-http_ssl_module --add-module=~/rpmbuild/SOURCES/modules/ngx_brotli --add-module=~/rpmbuild/SOURCES/modules/ngx_http_geoip2_module --add-module=~/rpmbuild/SOURCES/modules/headers-more-nginx-module|g' nginx.spec
+sed -i 's|--with-http_ssl_module|--with-http_ssl_module --add-module=~/rpmbuild/SOURCES/modules/ngx_http_geoip2_module --add-module=~/rpmbuild/SOURCES/modules/headers-more-nginx-module|g' nginx.spec
 sed -i 's|--with-stream_ssl_preread_module|--with-pcre-jit --with-openssl=~/rpmbuild/SOURCES/modules/openssl|g' nginx.spec
 
 echo "Build Nginx RPM package."
