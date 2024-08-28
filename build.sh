@@ -7,7 +7,7 @@ echo "Install dependencies."
 # Install necessary packages for building Nginx on AlmaLinux
 dnf install -y epel-release 
 dnf groupinstall -y "Development Tools" 
-dnf install -y cmake git libmaxminddb wget rpm-build pcre2-devel
+dnf install -y cmake git libmaxminddb wget rpm-build pcre2-devel rpmdevtools
 
 echo "Fetch NGINX source code."
 # Download Nginx source RPM and extract it
