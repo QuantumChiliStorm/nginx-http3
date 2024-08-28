@@ -25,7 +25,7 @@ cd ~/rpmbuild/SOURCES/modules
 
 git clone --depth 1 --recursive https://github.com/quictls/openssl > /dev/null 2>&1
 
-#echo "Fetch additional dependencies."
+echo "Fetch additional dependencies."
 #git clone --depth 1 --recursive https://github.com/google/ngx_brotli > /dev/null 2>&1
 #mkdir ngx_brotli/deps/brotli/out
 #cd ngx_brotli/deps/brotli/out
