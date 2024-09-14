@@ -8,7 +8,7 @@ echo "Install dependencies."
 dnf install -y epel-release 
 dnf install -y elrepo-release
 dnf groupinstall -y "Development Tools" 
-dnf install -y cmake git libmaxminddb libmaxminddb-devel wget rpm-build pcre-devel brotli-devel pcre2-devel rpmdevtools openssl-devel perl
+dnf install -y cmake git libmaxminddb wget rpm-build pcre-devel brotli-devel pcre2-devel rpmdevtools openssl-devel perl
 wget https://nginx.org/download/nginx-1.27.1.tar.gz
 tar -xf nginx-1.27.1.tar.gz
 cd nginx-1.27.1
