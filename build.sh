@@ -7,8 +7,8 @@ echo "Install dependencies."
 # Install necessary packages for building Nginx on AlmaLinux
 dnf install -y epel-release 
 dnf install -y elrepo-release
-sudo dnf install -y --nogpgcheck https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
-sudo dnf install -y --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
+dnf install -y --nogpgcheck https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm
+dnf install -y --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
 dnf groupinstall -y "Development Tools" 
 dnf install -y cmake git libmaxminddb wget rpm-build pcre-devel brotli-devel pcre2-devel rpmdevtools openssl-devel perl
 wget https://nginx.org/download/nginx-1.27.1.tar.gz
